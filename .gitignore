@@ -53,5 +53,4 @@ jacoco.exec
 *.exec
 
 ### Personal study notes (local only, not for public repo) ###
-STUDY_NOTES.md
-
+study/
