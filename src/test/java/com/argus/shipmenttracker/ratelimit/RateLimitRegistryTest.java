@@ -31,8 +31,10 @@ class RateLimitRegistryTest {
     @Test
     @DisplayName("bucket starts full and rejects requests beyond the burst capacity")
     void exhaustsAtBurstCapacity() {
+        // Refill rate is 1 token per minute, so during test execution
+        // (millisecond-scale) zero refills happen. Deterministic on CI.
         RateLimitProperties props = new RateLimitProperties();
-        props.setAuthenticated(new RateLimitProperties.Tier(1000, 3));
+        props.setAuthenticated(new RateLimitProperties.Tier(1, 3));
         RateLimitRegistry registry = new RateLimitRegistry(props);
 
         Bucket bucket = registry.bucketFor(UUID.randomUUID());
